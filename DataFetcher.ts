@@ -25,16 +25,23 @@ export class DataFetcher {
     async getData(url: string, companies: Array<string>){
         const document = await this.fetchFromWeb(url)
 
-        const data: {[key: string]: any} = {}
+        const data: Data = {}
+
         for(let i = 0; i < companies.length; i++){
             const company = companies[i]
-            const price = document?.querySelector(`#instruments-table > tbody > tr[title="${company}"] > td[data-title="Price"]`)?.textContent?.trim()
+            const rawPriceString = document?.querySelector(`#instruments-table > tbody > tr[title="${company}"] > td[data-title="Price"]`)?.textContent
+
+            const price = Number(rawPriceString?.trim().replace(/\$/, ''))
 
             data[company] = price
         }
 
         return data
     }
+}
+
+interface Data {
+    [company: string]: Number
 }
 
 
