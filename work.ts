@@ -1,7 +1,7 @@
 import { DataFetcher } from './DataFetcher'
 
 const companies: Array<string> = ['CHI', 'CNU', 'IFT', 'VCT', 'PPH', 'EBO']
-const url: string = 'https://www.nzx.com/markets/NZSX'
+const url = process.env.URL
 
 const fetcher = new DataFetcher()
 
